@@ -1,11 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import Enzyme, { shallow } from 'enzyme';
-import EnzymeAdapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { shallow } from 'enzyme';
 
 import { findByTestAttr } from './test/testUtils'
 import Congrats from './Congrats'
 
-Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 const setup = (props = {}) => {
 
@@ -24,8 +22,8 @@ test('renders no text when success prop is false', async () => {
     expect(component.text()).toBe('')
 })
 
-// test('renders non-empty congrats message', async () => {
-//     const wrapper = setup({ success: true });
-//     const message = await findByTestAttr(wrapper, 'component-congrats')    
-//     expect(message.text().length).not.toBe(0)
-// })
+test('renders non-empty congrats message', async () => {
+    const wrapper = setup({ success: true });
+    const message = await findByTestAttr(wrapper, 'component-congrats')    
+    expect(message.text().length).not.toBe(0)
+})

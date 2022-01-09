@@ -1,15 +1,19 @@
 import React from 'react'
 // receive the success state as a prop
 
-type CongratsType = {
-    success?: boolean
+// type CongratsType = {
+//     success?: boolean
+// }
+interface CongratsType  {
+    success: boolean
 }
-interface CongratsProps {
-    props?: CongratsType,
-  }
 
-const Congrats: React.FC<CongratsProps> =  ({ props }): JSX.Element => {
-    if (props?.success) {
+// interface CongratsProps {
+//     props?: CongratsType,
+//   }
+
+const Congrats: React.FC<CongratsType> =  ( props ) => {
+    if (props.success) {
         return (
 
             <div data-test="component-congrats">
