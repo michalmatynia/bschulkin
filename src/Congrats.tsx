@@ -5,7 +5,7 @@ import React from 'react'
 //     success?: boolean
 // }
 interface CongratsType  {
-    success: boolean
+    success?: boolean
 }
 
 // interface CongratsProps {
