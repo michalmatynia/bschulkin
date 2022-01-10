@@ -16,7 +16,7 @@ const Congrats: React.FC<CongratsType> =  ( props ) => {
     if (props.success) {
         return (
 
-            <div data-test="component-congrats">
+            <div data-test="component-congrats" className="alert alert-success">
                 <span data-test="congrats-message">
                     Congrats you guessed the word
                 </span>
