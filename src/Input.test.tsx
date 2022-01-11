@@ -9,23 +9,62 @@ import Input from "./Input";
 
 type SetMockState = { <S>(initialState: S | (() => S)): [S, React.Dispatch<React.SetStateAction<S>>]; <S = undefined>(): [S | undefined, React.Dispatch<React.SetStateAction<S | undefined>>]; }
 
-const setup = (props = { secretWord: "party" }) => {
-  return shallow(<Input secretWord={props.secretWord} />);
+const setup = (props = { success: false, secretWord: "party" }) => {
+  return shallow(<Input success={props.success} secretWord={props.secretWord} />);
 };
 
-test("input renders without error", async () => {
-  const wrapper = setup();
-  const inputComponent = await findByTestAttr(wrapper, "component-input");
-  expect(inputComponent.length).toBe(1);
-});
+describe('render', ()=> {
+  describe('success is true', ()=>{
+    let wrapper: any
+
+    beforeEach(()=>{
+      wrapper = setup({success: true, secretWord: ''})
+    })
+    test("input renders without error", async () => {
+      const inputComponent = await findByTestAttr(wrapper, "component-input");
+      expect(inputComponent.length).toBe(1);
+    });
+    test('input box does not show', async ()=>{
+      const inputBox = await findByTestAttr(wrapper, 'input-box')
+      expect(inputBox.exists()).toBe(false)
+    })
+    test('submit button does not show', async ()=>{
+      const submitButton = await findByTestAttr(wrapper, 'submit-button')
+      expect(submitButton.exists()).toBe(false)
+
+    })
+  })
+  describe('success is false', ()=> {
+    let wrapper: any
+
+    beforeEach(()=>{
+      wrapper = setup({success: false, secretWord: ''})
+    })
+    test("input renders without error", async () => {
+      const inputComponent = await findByTestAttr(wrapper, "component-input");
+      expect(inputComponent.length).toBe(1);
+    });
+    test('input box show', async ()=>{
+      const inputBox = await findByTestAttr(wrapper, 'input-box')
+      expect(inputBox.exists()).toBe(true)
+    })
+    test('submit button show', async ()=>{
+      const submitButton = await findByTestAttr(wrapper, 'submit-button')
+      expect(submitButton.exists()).toBe(true)
+
+    })
+
+  })
+})
+
 
 describe("state controlled input field", () => {
-  let mockSetCurrentGuess: SetMockState = jest.fn();
+  let mockSetCurrentGuess: SetMockState = jest.fn()
   let wrapper: any
   let originalUseState : SetMockState
 
   beforeEach(() => {
-    // mockSetCurrentGuess.mockClear()
+    jest.fn().mockClear()
 
     originalUseState = React.useState
     React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
