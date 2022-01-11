@@ -19,7 +19,15 @@ function Input({ secretWord }: InputPropTemplate): JSX.Element {
         value={currentGuess} 
         onChange={(event)=> {setCuttentGuess(event.target.value)}}
         />
-      <button data-test="submit-button" className="btn btn-primary mb-2">
+      <button 
+      data-test="submit-button" 
+      className="btn btn-primary mb-2"
+      onClick={(evt)=>{
+        evt.preventDefault()
+        setCuttentGuess("")
+      }}
+      
+      >
           Submit
       </button>
       </form>
