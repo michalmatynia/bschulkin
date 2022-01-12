@@ -28,7 +28,10 @@ const setup = async (state = {}) => {
   return wrapper;
 };
 
-describe("no words guessed", () => {
+describe('invalid word guessed', ()=>{
+  test.todo('guessed Words table does not get another roww')
+})
+describe.skip("no words guessed", () => {
   let wrapper: any;
 
   beforeEach(async () => {
@@ -43,7 +46,7 @@ describe("no words guessed", () => {
     expect(GuessedWordRows).toHaveLength(1);
   });
 });
-describe("some words guessed", () => {
+describe.skip("some words guessed", () => {
   let wrapper: any;
 
   beforeEach(async () => {
@@ -58,7 +61,7 @@ describe("some words guessed", () => {
     expect(guessedWordNodes).toHaveLength(2);
   });
 });
-describe("guess secret word", () => {
+describe.skip("guess secret word", () => {
   let wrapper: any;
 
   beforeEach(async () => {
